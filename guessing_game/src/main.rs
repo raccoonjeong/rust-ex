@@ -18,4 +18,5 @@ fn main() {
 
     println!("You guessed: {guess}");
 
+    // https://doc.rust-kr.org/ch02-00-guessing-game-tutorial.html 임의의 숫자 생성하기까지
 }

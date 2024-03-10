@@ -9,22 +9,30 @@ fn main() {
 
     // println!("The secret number is: {secret_number}");
 
-    println!("Please input your guess.");
-    
-    let mut guess = String::new();
+    loop {
+        println!("Please input your guess.");
+        
+        let mut guess = String::new();
 
-    let guess = guess.trim().parse().expect("Please type a number!");
+        io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to read line");
 
-    io::stdin()
-       .read_line(&mut guess)
-       .expect("Failed to read line");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue
+        };
 
-    println!("You guessed: {guess}");
+        println!("You guessed: {guess}");
 
-    match guess.cmp($secret_number) {
-        Ordering::Less => println!("Too small!"),
-        Ordering::Greater => println!("Too big!"),
-        Ordering::Equal => println!("You win!"),
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal =>{
+                 println!("You win!");
+                 break;
+            }
+        }
     }
 
     // https://doc.rust-kr.org/ch02-00-guessing-game-tutorial.html 추가된 라인은 다음과 같습니다:
